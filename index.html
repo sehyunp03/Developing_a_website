@@ -1,9 +1,93 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-    <meta charset="UTF-8"> <title>내 포트폴리오</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>포트폴리오 | 성장하는 개발자</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
-    안녕하세요! 경북대 컴학 2학년입니다.
+<body class="bg-[#0f172a] text-slate-200 font-sans selection:bg-blue-500/30">
+
+    <header class="min-h-screen flex flex-col justify-center items-center px-6 text-center">
+        <h1 class="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent mb-4">
+            안녕하세요, [박세현]입니다.
+        </h1>
+        <p class="text-xl md:text-2xl text-slate-400 mb-8">
+            유니티와 웹 기술로 새로운 가치를 만드는 <span class="text-blue-400 font-semibold">개발자</span>입니다.
+        </p>
+        <div class="flex gap-4">
+            <a href="#projects" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-medium transition-all shadow-lg shadow-blue-500/20">프로젝트 보기</a>
+            <a href="https://github.com/sehyunp03" target="_blank" class="bg-slate-800 hover:bg-slate-700 text-white px-8 py-3 rounded-full font-medium transition-all">GitHub</a>
+        </div>
+    </header>
+
+    <section class="py-20 bg-[#1e293b]/50">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-12">Tech Stack</h2>
+            <div class="flex flex-wrap justify-center gap-8">
+                <div class="flex flex-col items-center gap-2 group">
+                    <i class="fab fa-unity text-5xl group-hover:text-white transition-colors"></i>
+                    <span>Unity</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 group">
+                    <span class="text-4xl font-bold group-hover:text-blue-400 transition-colors">C#</span>
+                    <span>C#</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 group">
+                    <i class="fab fa-html5 text-5xl group-hover:text-orange-500 transition-colors"></i>
+                    <span>HTML/CSS</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 group">
+                    <i class="fab fa-js text-5xl group-hover:text-yellow-400 transition-colors"></i>
+                    <span>JavaScript</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-24 max-w-6xl mx-auto px-6">
+        <h2 class="text-3xl font-bold mb-12 text-center">Projects</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-[#1e293b] rounded-2xl overflow-hidden border border-slate-700 hover:border-blue-500 transition-all group">
+                <div class="h-48 bg-gradient-to-br from-blue-600/20 to-purple-600/20 flex items-center justify-center">
+                    <i class="fas fa-globe text-6xl text-blue-500/50 group-hover:scale-110 transition-transform"></i>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2 text-white">Developing a Website</h3>
+                    <p class="text-slate-400 mb-4 text-sm">Cloudflare Pages와 GitHub Action을 활용한 자동 배포 웹사이트 구축 프로젝트입니다.</p>
+                    <div class="flex gap-2">
+                        <span class="text-xs bg-slate-800 px-2 py-1 rounded text-blue-400">Tailwind</span>
+                        <span class="text-xs bg-slate-800 px-2 py-1 rounded text-blue-400">CI/CD</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-[#1e293b] rounded-2xl overflow-hidden border border-slate-700 hover:border-emerald-500 transition-all group">
+                <div class="h-48 bg-gradient-to-br from-emerald-600/20 to-teal-600/20 flex items-center justify-center">
+                    <i class="fas fa-gamepad text-6xl text-emerald-500/50 group-hover:scale-110 transition-transform"></i>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2 text-white">Unity 3D Project</h3>
+                    <p class="text-slate-400 mb-4 text-sm">유니티 엔진을 활용하여 제작 중인 3D 게임 프로젝트입니다.</p>
+                    <div class="flex gap-2">
+                        <span class="text-xs bg-slate-800 px-2 py-1 rounded text-emerald-400">Unity</span>
+                        <span class="text-xs bg-slate-800 px-2 py-1 rounded text-emerald-400">C#</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-20 text-center border-t border-slate-800">
+        <h2 class="text-2xl font-bold mb-6 text-white text-center">Contact</h2>
+        <div class="flex justify-center gap-8 text-2xl">
+            <a href="https://github.com/sehyunp03" target="_blank" class="text-slate-400 hover:text-white transition-colors"><i class="fab fa-github"></i></a>
+            <a href="mailto:bed1008@naver.com" class="text-slate-400 hover:text-white transition-colors"><i class="fas fa-envelope"></i></a>
+            <a href="#" class="text-slate-400 hover:text-white transition-colors"><i class="fas fa-blog"></i></a>
+        </div>
+        <p class="mt-8 text-slate-500 text-sm">© 2026 [박세현]. All rights reserved.</p>
+    </footer>
+
 </body>
 </html>
