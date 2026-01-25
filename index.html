@@ -3,15 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>포트폴리오 | 성장하는 개발자</title>
+    <title>포트폴리오 | 개발자 박세현</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* 필터링 시 부드러운 전환 효과 */
+        .filter-card { transition: all 0.3s ease; }
+        .tab-btn.active { background-color: #2563eb; color: white; border-color: #2563eb; }
+    </style>
 </head>
 <body class="bg-[#0f172a] text-slate-200 font-sans selection:bg-blue-500/30">
 
     <header class="min-h-screen flex flex-col justify-center items-center px-6 text-center">
         <h1 class="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent mb-4">
-            안녕하세요, [박세현]입니다.
+            안녕하세요, 박세현입니다.
         </h1>
         <p class="text-xl md:text-2xl text-slate-400 mb-8">
             유니티와 웹 기술로 새로운 가치를 만드는 <span class="text-blue-400 font-semibold">개발자</span>입니다.
@@ -47,61 +52,108 @@
     </section>
 
     <section id="projects" class="py-24 max-w-6xl mx-auto px-6">
-        <h2 class="text-3xl font-bold mb-12 text-center">Projects</h2>
-        <div class="grid md:grid-cols-2 gap-8">
-            <div class="bg-[#1e293b] rounded-2xl overflow-hidden border border-slate-700 hover:border-blue-500 transition-all group">
-                <div class="h-48 bg-gradient-to-br from-blue-600/20 to-purple-600/20 flex items-center justify-center">
-                    <i class="fas fa-globe text-6xl text-blue-500/50 group-hover:scale-110 transition-transform"></i>
+        <h2 class="text-4xl font-bold mb-12 text-center text-white">My Journey</h2>
+        
+        <div class="flex flex-wrap justify-center gap-4 mb-16">
+            <button onclick="filterSelection('all')" class="tab-btn active px-6 py-2 rounded-full border border-blue-500 transition-all">전체보기</button>
+            <button onclick="filterSelection('about')" class="tab-btn px-6 py-2 rounded-full border border-slate-700 text-slate-400 hover:border-blue-500 hover:text-blue-400 transition-all">자기소개</button>
+            <button onclick="filterSelection('project')" class="tab-btn px-6 py-2 rounded-full border border-slate-700 text-slate-400 hover:border-blue-500 hover:text-blue-400 transition-all">프로젝트</button>
+            <button onclick="filterSelection('abroad')" class="tab-btn px-6 py-2 rounded-full border border-slate-700 text-slate-400 hover:border-blue-500 hover:text-blue-400 transition-all">해외경험</button>
+            <button onclick="filterSelection('etc')" class="tab-btn px-6 py-2 rounded-full border border-slate-700 text-slate-400 hover:border-blue-500 hover:text-blue-400 transition-all">기타활동</button>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <div class="filter-card about bg-[#1e293b] rounded-2xl overflow-hidden border border-slate-700 hover:-translate-y-2 transition-all">
+                <div class="h-40 bg-gradient-to-br from-indigo-600/20 to-blue-600/20 flex items-center justify-center">
+                    <i class="fas fa-user-astronaut text-5xl text-indigo-500/50"></i>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2 text-white">성장하는 개발자 박세현</h3>
+                    <p class="text-slate-400 text-sm">끊임없이 배우고 기록하며, 기술로 문제를 해결하는 것을 즐깁니다.</p>
+                </div>
+            </div>
+
+            <div class="filter-card project bg-[#1e293b] rounded-2xl overflow-hidden border border-slate-700 hover:-translate-y-2 transition-all">
+                <div class="h-40 bg-gradient-to-br from-blue-600/20 to-purple-600/20 flex items-center justify-center">
+                    <i class="fas fa-globe text-5xl text-blue-500/50"></i>
                 </div>
                 <div class="p-6">
                     <h3 class="text-xl font-bold mb-2 text-white">Developing a Website</h3>
-                    <p class="text-slate-400 mb-4 text-sm">Cloudflare Pages와 GitHub Action을 활용한 자동 배포 웹사이트 구축 프로젝트입니다.</p>
-                    <div class="flex gap-2">
-                        <span class="text-xs bg-slate-800 px-2 py-1 rounded text-blue-400">Tailwind</span>
-                        <span class="text-xs bg-slate-800 px-2 py-1 rounded text-blue-400">CI/CD</span>
-                    </div>
+                    <p class="text-slate-400 text-sm">Cloudflare Pages와 GitHub Action을 활용한 자동 배포 시스템 구축.</p>
                 </div>
             </div>
 
-            <div class="bg-[#1e293b] rounded-2xl overflow-hidden border border-slate-700 hover:border-emerald-500 transition-all group">
-                <div class="h-48 bg-gradient-to-br from-emerald-600/20 to-teal-600/20 flex items-center justify-center">
-                    <i class="fas fa-gamepad text-6xl text-emerald-500/50 group-hover:scale-110 transition-transform"></i>
+            <div class="filter-card project bg-[#1e293b] rounded-2xl overflow-hidden border border-slate-700 hover:-translate-y-2 transition-all">
+                <div class="h-40 bg-gradient-to-br from-emerald-600/20 to-teal-600/20 flex items-center justify-center">
+                    <i class="fas fa-gamepad text-5xl text-emerald-500/50"></i>
                 </div>
                 <div class="p-6">
                     <h3 class="text-xl font-bold mb-2 text-white">Unity 3D Project</h3>
-                    <p class="text-slate-400 mb-4 text-sm">유니티 엔진을 활용하여 제작 중인 3D 게임 프로젝트입니다.</p>
-                    <div class="flex gap-2">
-                        <span class="text-xs bg-slate-800 px-2 py-1 rounded text-emerald-400">Unity</span>
-                        <span class="text-xs bg-slate-800 px-2 py-1 rounded text-emerald-400">C#</span>
-                    </div>
+                    <p class="text-slate-400 text-sm">유니티 엔진을 활용하여 제작 중인 3D 게임 프로젝트입니다.</p>
                 </div>
             </div>
 
-            <a href="abroad.html" class="bg-[#1e293b] rounded-2xl overflow-hidden border border-slate-700 hover:border-orange-500 transition-all group">
-                <div class="h-48 bg-gradient-to-br from-orange-600/20 to-yellow-600/20 flex items-center justify-center">
-                    <i class="fas fa-plane-departure text-6xl text-orange-500/50 group-hover:scale-110 transition-transform"></i>
+            <a href="abroad.html" class="filter-card abroad bg-[#1e293b] rounded-2xl overflow-hidden border border-slate-700 hover:border-orange-500 hover:-translate-y-2 transition-all group block">
+                <div class="h-40 bg-gradient-to-br from-orange-600/20 to-yellow-600/20 flex items-center justify-center">
+                    <i class="fas fa-plane-departure text-5xl text-orange-500/50 group-hover:scale-110 transition-transform"></i>
                 </div>
                 <div class="p-6">
                     <h3 class="text-xl font-bold mb-2 text-white">해외 프로그램 경험</h3>
-                    <p class="text-slate-400 mb-4 text-sm">필리핀 및 미국 어학 연수를 통한 글로벌 역량 강화 경험입니다.</p>
-                    <div class="flex gap-2">
-                        <span class="text-xs bg-slate-800 px-2 py-1 rounded text-orange-400">Philippines</span>
-                        <span class="text-xs bg-slate-800 px-2 py-1 rounded text-orange-400">USA</span>
-                    </div>
+                    <p class="text-slate-400 text-sm">필리핀 및 미국 어학 연수를 통한 글로벌 역량 강화 경험.</p>
                 </div>
             </a>
+
+            <div class="filter-card etc bg-[#1e293b] rounded-2xl overflow-hidden border border-slate-700 hover:-translate-y-2 transition-all">
+                <div class="h-40 bg-gradient-to-br from-pink-600/20 to-red-600/20 flex items-center justify-center">
+                    <i class="fas fa-certificate text-5xl text-pink-500/50"></i>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2 text-white">기타 활동</h3>
+                    <p class="text-slate-400 text-sm">자격증 및 다양한 대외활동 기록입니다.</p>
+                </div>
+            </div>
+
         </div>
     </section>
 
     <footer class="py-20 text-center border-t border-slate-800">
-        <h2 class="text-2xl font-bold mb-6 text-white text-center">Contact</h2>
+        <h2 class="text-2xl font-bold mb-6 text-white">Contact</h2>
         <div class="flex justify-center gap-8 text-2xl">
             <a href="https://github.com/sehyunp03" target="_blank" class="text-slate-400 hover:text-white transition-colors"><i class="fab fa-github"></i></a>
             <a href="mailto:bed1008@naver.com" class="text-slate-400 hover:text-white transition-colors"><i class="fas fa-envelope"></i></a>
             <a href="#" class="text-slate-400 hover:text-white transition-colors"><i class="fas fa-blog"></i></a>
         </div>
-        <p class="mt-8 text-slate-500 text-sm">© 2026 [박세현]. All rights reserved.</p>
+        <p class="mt-8 text-slate-500 text-sm">© 2026 박세현. All rights reserved.</p>
     </footer>
+
+    <script>
+        function filterSelection(c) {
+            const cards = document.getElementsByClassName("filter-card");
+            const btns = document.getElementsByClassName("tab-btn");
+            
+            // 모든 카드 숨기기/보이기 로직
+            for (let i = 0; i < cards.length; i++) {
+                if (c === 'all') {
+                    cards[i].classList.remove('hidden');
+                } else {
+                    if (cards[i].classList.contains(c)) {
+                        cards[i].classList.remove('hidden');
+                    } else {
+                        cards[i].classList.add('hidden');
+                    }
+                }
+            }
+
+            // 버튼 활성화 상태 업데이트
+            for (let i = 0; i < btns.length; i++) {
+                btns[i].classList.remove('active');
+                if (btns[i].getAttribute('onclick').includes(c)) {
+                    btns[i].classList.add('active');
+                }
+            }
+        }
+    </script>
 
 </body>
 </html>
