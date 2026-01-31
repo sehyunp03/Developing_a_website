@@ -134,7 +134,17 @@
 
     <footer class="py-20 text-center border-t border-slate-800" data-aos="zoom-in">
         <h2 class="text-2xl font-bold mb-6 text-white">Contact</h2>
-        <p class="text-blue-400 font-medium mb-6 select-all">bed1008@naver.com</p>
+        
+        <div class="relative inline-block mb-10 group cursor-pointer" onclick="copyEmail()">
+            <p id="emailText" class="text-blue-400 font-medium text-lg md:text-xl hover:text-blue-300 transition-colors">
+                bed1008@naver.com
+            </p>
+            <span id="copyTooltip" class="absolute -top-10 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-xs py-1.5 px-3 rounded-lg opacity-0 transition-all duration-300 pointer-events-none">
+                복사 완료! ✨
+            </span>
+            <p class="text-slate-500 text-xs mt-2 opacity-0 group-hover:opacity-100 transition-opacity">클릭하여 복사</p>
+        </div>
+
         <div class="flex justify-center gap-8 text-2xl">
             <a href="https://github.com/sehyunp03" target="_blank" class="text-slate-400 hover:text-white transition-colors"><i class="fab fa-github"></i></a>
             <a href="mailto:bed1008@naver.com" class="text-slate-400 hover:text-white transition-colors"><i class="fas fa-envelope"></i></a>
@@ -152,7 +162,25 @@
             offset: 100
         });
 
-        // 필터링 함수
+        // 이메일 복사 함수 추가
+        function copyEmail() {
+            const email = document.getElementById('emailText').innerText;
+            const tooltip = document.getElementById('copyTooltip');
+
+            navigator.clipboard.writeText(email).then(() => {
+                // 툴팁 보이기 및 위로 살짝 이동
+                tooltip.classList.remove('opacity-0');
+                tooltip.classList.add('opacity-100', '-translate-y-2');
+
+                // 1.5초 후 초기화
+                setTimeout(() => {
+                    tooltip.classList.remove('opacity-100', '-translate-y-2');
+                    tooltip.classList.add('opacity-0');
+                }, 1500);
+            });
+        }
+
+        // 필터링 함수 (기존 코드 유지)
         function filterSelection(c) {
             const cards = document.getElementsByClassName("filter-card");
             const btns = document.getElementsByClassName("tab-btn");
@@ -175,10 +203,8 @@
                     btns[i].classList.add('active');
                 }
             }
-            // 필터링 후 AOS 리프레시 (숨겨졌던 카드가 나타날 때 애니메이션 재작동 방지용)
             AOS.refresh();
         }
     </script>
-
 </body>
 </html>
