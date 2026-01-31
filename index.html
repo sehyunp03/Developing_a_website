@@ -133,75 +133,71 @@
     </section>
 
     <footer class="py-20 text-center border-t border-slate-800" data-aos="zoom-in">
-        <h2 class="text-2xl font-bold mb-6 text-white">Contact</h2>
+        <h2 class="text-2xl font-bold mb-8 text-white">Contact</h2>
         
-        <div class="relative inline-block mb-10 group cursor-pointer" onclick="copyEmail()">
-            <p id="emailText" class="text-blue-400 font-medium text-lg md:text-xl hover:text-blue-300 transition-colors">
-                bed1008@naver.com
-            </p>
-            <span id="copyTooltip" class="absolute -top-10 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-xs py-1.5 px-3 rounded-lg opacity-0 transition-all duration-300 pointer-events-none">
-                복사 완료! ✨
-            </span>
-            <p class="text-slate-500 text-xs mt-2 opacity-0 group-hover:opacity-100 transition-opacity">클릭하여 복사</p>
-        </div>
-
         <div class="flex justify-center gap-8 text-2xl">
-            <a href="https://github.com/sehyunp03" target="_blank" class="text-slate-400 hover:text-white transition-colors"><i class="fab fa-github"></i></a>
-            <a href="mailto:bed1008@naver.com" class="text-slate-400 hover:text-white transition-colors"><i class="fas fa-envelope"></i></a>
-            <a href="#" class="text-slate-400 hover:text-white transition-colors"><i class="fas fa-blog"></i></a>
+            <a href="https://github.com/sehyunp03" target="_blank" class="text-slate-400 hover:text-white transition-colors">
+                <i class="fab fa-github"></i>
+            </a>
+
+            <div class="relative group cursor-pointer" onclick="copyEmail()">
+                <i class="fas fa-envelope text-slate-400 group-hover:text-blue-400 transition-colors"></i>
+                
+                <span id="copyTooltip" class="absolute -top-10 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[10px] py-1 px-2 rounded opacity-0 transition-all duration-300 pointer-events-none whitespace-nowrap">
+                    이메일 복사 완료! ✨
+                </span>
+                
+                <span class="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                    Click to Copy
+                </span>
+            </div>
+
+            <a href="#" class="text-slate-400 hover:text-white transition-colors">
+                <i class="fas fa-blog"></i>
+            </a>
         </div>
-        <p class="mt-8 text-slate-500 text-sm">© 2026 박세현. All rights reserved.</p>
+        
+        <p class="mt-12 text-slate-500 text-sm">© 2026 박세현. All rights reserved.</p>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // AOS 초기화
         AOS.init({
             duration: 1000,
             once: true,
             offset: 100
         });
 
-        // 이메일 복사 함수 추가
+        // 이메일 복사 함수 (아이콘 클릭 시 실행)
         function copyEmail() {
-            const email = document.getElementById('emailText').innerText;
+            const email = "bed1008@naver.com"; // 복사할 주소를 직접 입력
             const tooltip = document.getElementById('copyTooltip');
 
             navigator.clipboard.writeText(email).then(() => {
-                // 툴팁 보이기 및 위로 살짝 이동
                 tooltip.classList.remove('opacity-0');
                 tooltip.classList.add('opacity-100', '-translate-y-2');
 
-                // 1.5초 후 초기화
                 setTimeout(() => {
                     tooltip.classList.remove('opacity-100', '-translate-y-2');
                     tooltip.classList.add('opacity-0');
                 }, 1500);
             });
         }
-
-        // 필터링 함수 (기존 코드 유지)
+        
+        // 필터링 함수
         function filterSelection(c) {
             const cards = document.getElementsByClassName("filter-card");
             const btns = document.getElementsByClassName("tab-btn");
-            
             for (let i = 0; i < cards.length; i++) {
-                if (c === 'all') {
-                    cards[i].classList.remove('hidden');
-                } else {
-                    if (cards[i].classList.contains(c)) {
-                        cards[i].classList.remove('hidden');
-                    } else {
-                        cards[i].classList.add('hidden');
-                    }
+                if (c === 'all') { cards[i].classList.remove('hidden'); }
+                else {
+                    if (cards[i].classList.contains(c)) { cards[i].classList.remove('hidden'); }
+                    else { cards[i].classList.add('hidden'); }
                 }
             }
-
             for (let i = 0; i < btns.length; i++) {
                 btns[i].classList.remove('active');
-                if (btns[i].getAttribute('onclick').includes(c)) {
-                    btns[i].classList.add('active');
-                }
+                if (btns[i].getAttribute('onclick').includes(c)) { btns[i].classList.add('active'); }
             }
             AOS.refresh();
         }
