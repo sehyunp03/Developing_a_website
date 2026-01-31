@@ -15,7 +15,27 @@
         .tab-btn.active { background-color: #2563eb; color: white; border-color: #2563eb; }
     </style>
 </head>
+    
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<style>
+    /* 구글 번역 상단 바(툴바) 숨기기 */
+    body { top: 0 !important; }
+    .skiptranslate iframe { display: none !important; }
+    .goog-te-banner-frame { display: none !important; }
+    #goog-gt-tt { display: none !important; }
+</style>
+    
 <body class="bg-[#0f172a] text-slate-200 font-sans selection:bg-blue-500/30 overflow-x-hidden">
+
+    <div id="google_translate_element" style="display:none;"></div>
+
+    <div class="fixed bottom-10 right-10 z-[1000]" data-aos="fade-left">
+        <button onclick="toggleLanguage()" class="bg-slate-800/80 backdrop-blur-md border border-slate-700 text-white px-4 py-2 rounded-full shadow-xl hover:border-blue-500 transition-all flex items-center gap-2 group">
+            <i class="fas fa-globe text-blue-400 group-hover:rotate-12 transition-transform"></i>
+            <span id="langBtnText" class="text-sm font-medium">English</span>
+        </button>
+    </div>
 
     <header class="min-h-screen flex flex-col justify-center items-center px-6 text-center">
         <h1 data-aos="fade-down" class="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent mb-4">
@@ -167,7 +187,7 @@
             once: true,
             offset: 100
         });
-
+        
         // 이메일 복사 함수 (아이콘 클릭 시 실행)
         function copyEmail() {
             const email = "bed1008@naver.com"; // 복사할 주소를 직접 입력
@@ -182,6 +202,39 @@
                     tooltip.classList.add('opacity-0');
                 }, 1500);
             });
+        }
+
+        // 구글 번역 초기화 함수
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'ko',
+                includedLanguages: 'en,ko', // 한국어와 영어만 사용
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+        
+        // 언어 전환 함수
+        function toggleLanguage() {
+            const langBtnText = document.getElementById('langBtnText');
+            const translateCombo = document.querySelector('.goog-te-combo');
+        
+            if (!translateCombo) {
+                alert("번역 시스템 로딩 중입니다. 잠시 후 다시 시도해주세요!");
+                return;
+            }
+        
+            if (langBtnText.innerText === "English") {
+                // 영어로 번역
+                translateCombo.value = 'en';
+                translateCombo.dispatchEvent(new Event('change'));
+                langBtnText.innerText = "한국어";
+            } else {
+                // 한국어로 복구
+                translateCombo.value = 'ko';
+                translateCombo.dispatchEvent(new Event('change'));
+                langBtnText.innerText = "English";
+            }
         }
         
         // 필터링 함수
