@@ -7,56 +7,204 @@
     <title>포트폴리오 | 개발자 박세현</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        html {
-            scroll-behavior: smooth;
+        :root {
+            --paper: #f5f3ee;
+            --ink: #222222;
+            --muted: #625f59;
+            --accent: #984c3b;
+            --rule: #d3cfc6;
+            --panel: #eae7df;
         }
-        .filter-card { transition: all 0.3s ease; }
-        .tab-btn.active { background-color: #2563eb; color: white; border-color: #2563eb; }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--paper);
+            color: var(--ink);
+            font-family: Arial, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+            line-height: 1.75;
+        }
+        ::selection { background: #ded3c3; color: var(--ink); }
+        h1, h2, h3 {
+            font-family: Georgia, "Noto Serif KR", "Batang", serif;
+            font-weight: 500 !important;
+            letter-spacing: -0.035em;
+            color: var(--ink);
+            text-wrap: balance;
+        }
+        h1 { line-height: 1.25 !important; }
+        h2, h3 { line-height: 1.4; }
+        html[lang="ko"] h1, html[lang="ko"] h3 { word-break: keep-all; }
+        p { color: var(--muted); }
+        .text-ink { color: var(--ink); }
+        .text-muted { color: var(--muted); }
+        .text-accent { color: var(--accent); }
+        .hover-accent:hover { color: var(--accent); }
+        .group:hover .group-accent { color: var(--accent); }
+        .rule { border-color: var(--rule); }
+        .language-link {
+            background: var(--paper);
+            border-bottom: 1px solid var(--rule);
+            font-weight: 400;
+            letter-spacing: .04em;
+        }
+        .hero-primary, .hero-secondary {
+            border: 1px solid var(--ink);
+            transition: background-color .2s, color .2s;
+        }
+        .hero-primary { background: var(--ink); color: var(--paper); }
+        .hero-secondary { background: transparent; color: var(--ink); }
+        .hero-primary:hover, .hero-secondary:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--paper);
+        }
+        .stack-section {
+            border-top: 1px solid var(--rule);
+            border-bottom: 1px solid var(--rule);
+        }
+        .tab-btn {
+            color: var(--muted);
+            background: transparent;
+            border: 0;
+            border-bottom: 1px solid var(--rule);
+            transition: color .2s, border-color .2s;
+        }
+        .tab-btn:hover, .tab-btn.active {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+        .filter-card {
+            background: transparent;
+            border: 0;
+            border-top: 1px solid var(--rule);
+        }
+        a.filter-card:hover { border-color: var(--accent); }
+        .card-art { background: var(--panel); color: var(--muted); }
+        .filter-card .uppercase {
+            font-family: "Courier New", monospace;
+            font-weight: 400;
+            letter-spacing: .15em;
+        }
+        #copyTooltip { background: var(--ink); color: var(--paper); }
+        :focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { transition: none !important; }
+        }
+
+        /* Reference-inspired cover. Edit the photos and introduction below. */
+        .masthead { height: 94px; padding: 0 5.1%; display: flex; align-items: center;
+            justify-content: space-between; border-bottom: 1px solid var(--rule); }
+        .wordmark, .cover-nav, .eyebrow, .photo-caption, .signature {
+            font-family: "Courier New", monospace; text-transform: uppercase;
+            font-size: 14px; letter-spacing: .19em; }
+        .wordmark { font-size: 20px; font-weight: 700; letter-spacing: .22em; }
+        .cover-nav { display: flex; align-items: center; gap: clamp(24px, 3.4vw, 70px); }
+        .cover-nav a:hover { color: var(--accent); }
+        .cover-nav .current::before { content: ""; display: inline-block; width: 6px;
+            height: 6px; background: #e6644a; border-radius: 50%; margin-right: 12px; vertical-align: middle; }
+        .editorial-cover { margin: 0 5.1%; padding: 48px 0 54px; position: relative;
+            background-image: linear-gradient(to right, rgba(34,34,34,.08) 1px, transparent 1px);
+            background-size: calc(100% / 12) 100%; }
+        .eyebrow { display: flex; align-items: center; gap: 24px; margin-bottom: 80px; }
+        .eyebrow::after { content: ""; width: 14%; height: 1px; background: var(--rule); }
+        .cover-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 2%; align-items: start; }
+        .cover-photo { margin: 0; min-width: 0; }
+        .cover-photo.offset { margin-top: 5.2vw; }
+        .cover-photo img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
+            filter: grayscale(1); border: 1px solid var(--rule); }
+        .cover-photo:first-child img { object-position: center 38%; }
+        .photo-caption { display: flex; justify-content: space-between; gap: 12px;
+            margin-top: 20px; font-size: 12px; letter-spacing: .14em; }
+        .photo-caption span:last-child { color: var(--muted); text-align: right; }
+        .cover-copy h1 { font-size: clamp(30px,2.25vw,48px); line-height: 1.22 !important;
+            letter-spacing: -.025em; font-weight: 700 !important; margin: 0 0 32px; }
+        .cover-copy p { font-size: clamp(16px,1.12vw,23px); line-height: 1.7; margin: 0 0 28px; }
+        .cover-copy .signature { font-size: 12px; margin-top: 48px; letter-spacing: .18em; }
+        html[lang="ko"] .cover-copy h1 { line-height: 1.5 !important; font-size: clamp(28px,2.1vw,44px); }
+        .cover-copy .intro-link { display: inline-block; border-bottom: 1px solid var(--rule);
+            font-size: 14px; margin-top: 8px; }
+        .intro-link:hover { color: var(--accent); border-color: var(--accent); }
+        @media (max-width: 1000px) {
+            .masthead { height: auto; min-height: 80px; padding-top: 20px; padding-bottom: 20px; gap: 24px; flex-wrap: wrap; }
+            .cover-nav { gap: 24px; font-size: 12px; flex-wrap: wrap; }
+            .eyebrow { margin-bottom: 48px; }
+            .cover-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 32px; }
+            .cover-copy { grid-column: 1 / -1; max-width: 680px; margin-top: 16px; }
+            .cover-copy h1 { font-size: 38px; }
+            .cover-photo.offset { margin-top: 60px; }
+        }
+        @media (max-width: 600px) {
+            .wordmark { font-size: 17px; }
+            .cover-nav { gap: 18px; letter-spacing: .1em; }
+            .editorial-cover { padding-top: 32px; background-size: 25% 100%; }
+            .cover-grid { grid-template-columns: 1fr; gap: 32px; }
+            .cover-copy { grid-column: auto; }
+            .cover-photo.offset { margin-top: 0; }
+            .photo-caption { font-size: 10px; }
+            .cover-copy h1 { font-size: 34px; }
+            .cover-copy .signature { margin-top: 32px; }
+        }
     </style>
 </head>
     
-<body class="bg-[#0f172a] text-slate-200 font-sans selection:bg-blue-500/30 overflow-x-hidden">
+<body class="text-muted font-sans overflow-x-hidden">
 
-    <div class="fixed top-6 right-6 z-[2000]">
-        <a href="index.html" class="flex items-center gap-2 bg-slate-900/50 backdrop-blur-md border border-slate-700 px-4 py-2 rounded-full text-white text-sm font-bold hover:border-blue-500 hover:text-blue-400 transition-all shadow-lg">
-            <i class="fas fa-globe"></i>
-            <span>English</span>
-        </a>
-    </div>
-    
-    <header class="min-h-screen flex flex-col justify-center items-center px-6 text-center">
-        <h1 data-aos="fade-down" class="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent mb-4">
-            안녕하세요, 박세현입니다.
-        </h1>
-        <p data-aos="fade-up" data-aos-delay="200" class="text-xl md:text-2xl text-slate-400 mb-8">
-            유니티와 웹 기술로 새로운 가치를 만드는 <span class="text-blue-400 font-semibold">개발자</span>입니다.
-        </p>
-        <div data-aos="zoom-in" data-aos-delay="400" class="flex gap-4">
-            <a href="#projects" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-medium transition-all shadow-lg shadow-blue-500/20">프로젝트 보기</a>
-            <a href="https://github.com/sehyunp03" target="_blank" class="bg-slate-800 hover:bg-slate-700 text-white px-8 py-3 rounded-full font-medium transition-all">GitHub</a>
-        </div>
+    <header class="masthead">
+        <a class="wordmark" href="index_ko.html">SEHYUN PARK</a>
+        <nav class="cover-nav" aria-label="주 메뉴">
+            <a href="#projects">WORK</a>
+            <a href="pages/abroad.html">JOURNAL</a>
+            <a class="current" href="#introduction">ABOUT</a>
+            <a href="#contact">CONTACT</a>
+            <a href="index.html" lang="en">EN</a>
+        </nav>
     </header>
+    <section class="editorial-cover" id="introduction" aria-labelledby="cover-title">
+        <div class="eyebrow">THE PERSON</div>
+        <div class="cover-grid">
+            <!-- First photo: replace src with your own portrait path. -->
+            <figure class="cover-photo">
+                <img src="assets/images/profile/profile.jpg" alt="박세현 프로필 사진" fetchpriority="high">
+                <figcaption class="photo-caption"><span>SEHYUN PARK</span><span>CODE / LEARNING</span></figcaption>
+            </figure>
+            <!-- Second photo: replace src with a project or travel photo. -->
+            <figure class="cover-photo offset">
+                <img src="assets/images/abroad/usa_ces.jpg" alt="CES 2026 전시장">
+                <figcaption class="photo-caption"><span>CES 2026</span><span>LAS VEGAS / USA</span></figcaption>
+            </figure>
+            <div class="cover-copy">
+                <h1 id="cover-title">만들고, 배우고,<br>경험을 기록합니다.</h1>
+                <p>안녕하세요, 박세현입니다. 경북대학교에서 컴퓨터공학을 공부하며, Unity와 웹 기술로 프로젝트를 만들고 있습니다.</p>
+                <p>이곳에는 직접 만든 작업과 그 과정, 그리고 필리핀과 미국에서 보고 배운 경험을 담았습니다.</p>
+                <p>배우고 기록하며, 하나씩 완성해 나갑니다.</p>
+                <a class="intro-link" href="pages/about.html">자기소개 더 보기 ↗</a>
+                <p class="signature">— SEHYUN PARK, 2026</p>
+            </div>
+        </div>
+    </section>
 
-    <section class="py-20 bg-[#1e293b]/50">
+    <section class="py-20 stack-section">
         <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 data-aos="fade-up" class="text-3xl font-bold mb-12">Tech Stack</h2>
+            <h2 class="text-3xl font-bold mb-12">Tech Stack</h2>
             <div class="flex flex-wrap justify-center gap-8">
-                <div data-aos="flip-left" data-aos-delay="100" class="flex flex-col items-center gap-2 group">
-                    <i class="fab fa-unity text-5xl group-hover:text-white transition-colors"></i>
+                <div class="flex flex-col items-center gap-2 group">
+                    <i class="fab fa-unity text-5xl group-accent transition-colors"></i>
                     <span>Unity</span>
                 </div>
-                <div data-aos="flip-left" data-aos-delay="200" class="flex flex-col items-center gap-2 group">
-                    <span class="text-4xl font-bold group-hover:text-blue-400 transition-colors">C#</span>
+                <div class="flex flex-col items-center gap-2 group">
+                    <span class="text-4xl font-bold group-accent transition-colors">C#</span>
                     <span>C#</span>
                 </div>
-                <div data-aos="flip-left" data-aos-delay="300" class="flex flex-col items-center gap-2 group">
-                    <i class="fab fa-html5 text-5xl group-hover:text-orange-500 transition-colors"></i>
+                <div class="flex flex-col items-center gap-2 group">
+                    <i class="fab fa-html5 text-5xl group-accent transition-colors"></i>
                     <span>HTML/CSS</span>
                 </div>
-                <div data-aos="flip-left" data-aos-delay="400" class="flex flex-col items-center gap-2 group">
-                    <i class="fab fa-js text-5xl group-hover:text-yellow-400 transition-colors"></i>
+                <div class="flex flex-col items-center gap-2 group">
+                    <i class="fab fa-js text-5xl group-accent transition-colors"></i>
                     <span>JavaScript</span>
                 </div>
             </div>
@@ -64,76 +212,76 @@
     </section>
 
     <section id="projects" class="py-24 max-w-6xl mx-auto px-6">
-        <h2 data-aos="fade-up" class="text-4xl font-bold mb-12 text-center text-white">My Journey</h2>
+        <h2 class="text-4xl font-bold mb-12 text-center text-ink">My Journey</h2>
         
-        <div data-aos="fade-up" class="flex flex-wrap justify-center gap-4 mb-16">
-            <button onclick="filterSelection('all')" class="tab-btn active px-6 py-2 rounded-full border border-blue-500 transition-all">전체보기</button>
-            <button onclick="filterSelection('about')" class="tab-btn px-6 py-2 rounded-full border border-slate-700 text-slate-400 hover:border-blue-500 hover:text-blue-400 transition-all">자기소개</button>
-            <button onclick="filterSelection('project')" class="tab-btn px-6 py-2 rounded-full border border-slate-700 text-slate-400 hover:border-blue-500 hover:text-blue-400 transition-all">프로젝트</button>
-            <button onclick="filterSelection('abroad')" class="tab-btn px-6 py-2 rounded-full border border-slate-700 text-slate-400 hover:border-blue-500 hover:text-blue-400 transition-all">해외경험</button>
-            <button onclick="filterSelection('etc')" class="tab-btn px-6 py-2 rounded-full border border-slate-700 text-slate-400 hover:border-blue-500 hover:text-blue-400 transition-all">기타활동</button>
+        <div class="flex flex-wrap justify-center gap-4 mb-16">
+            <button onclick="filterSelection('all')" class="tab-btn active px-6 py-2 border rule transition-all">전체보기</button>
+            <button onclick="filterSelection('about')" class="tab-btn px-6 py-2 border rule text-muted hover-accent transition-all">자기소개</button>
+            <button onclick="filterSelection('project')" class="tab-btn px-6 py-2 border rule text-muted hover-accent transition-all">프로젝트</button>
+            <button onclick="filterSelection('abroad')" class="tab-btn px-6 py-2 border rule text-muted hover-accent transition-all">해외경험</button>
+            <button onclick="filterSelection('etc')" class="tab-btn px-6 py-2 border rule text-muted hover-accent transition-all">기타활동</button>
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             
-            <a href="pages/about.html" data-aos="fade-up" data-aos-delay="100" class="filter-card about bg-[#1e293b] rounded-2xl overflow-hidden border border-slate-700 hover:border-blue-500 hover:-translate-y-2 transition-all group block">
-                <div class="h-40 bg-gradient-to-br from-blue-600/20 to-cyan-600/20 flex items-center justify-center">
-                    <i class="fas fa-laptop-code text-5xl text-blue-500/50 group-hover:scale-110 group-hover:text-blue-400 transition-all duration-300"></i>
+            <a href="pages/about.html" class="filter-card about overflow-hidden border rule transition-all group block">
+                <div class="h-40 flex items-center justify-center card-art">
+                    <i class="fas fa-laptop-code text-5xl text-accent group-accent transition-all duration-300"></i>
                 </div>
                 <div class="p-6">
-                    <div class="text-blue-400 text-xs font-bold uppercase tracking-wider mb-2">About Me</div>
-                    <h3 class="text-xl font-bold mb-2 text-white">성장하는 개발자 박세현</h3>
-                    <p class="text-slate-400 text-sm">끊임없이 배우고 기록하며, 기술로 문제를 해결하는 것을 즐깁니다.</p>
-                    <div class="mt-4 flex items-center text-blue-400 text-sm font-semibold">
-                        프로필 보기 <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    <div class="text-accent text-xs font-bold uppercase tracking-wider mb-2">About Me</div>
+                    <h3 class="text-xl font-bold mb-2 text-ink">성장하는 개발자 박세현</h3>
+                    <p class="text-muted text-sm">끊임없이 배우고 기록하며, 기술로 문제를 해결하는 것을 즐깁니다.</p>
+                    <div class="mt-4 flex items-center text-accent text-sm font-semibold">
+                        프로필 보기 <i class="fas fa-arrow-right ml-2 transition-transform"></i>
                     </div>
                 </div>
             </a>
 
-            <div data-aos="fade-up" data-aos-delay="200" class="filter-card project bg-[#1e293b] rounded-2xl overflow-hidden border border-slate-700 hover:-translate-y-2 transition-all">
-                <div class="h-40 bg-gradient-to-br from-blue-600/20 to-purple-600/20 flex items-center justify-center">
-                    <i class="fas fa-globe text-5xl text-blue-500/50"></i>
+            <div class="filter-card project overflow-hidden border rule transition-all">
+                <div class="h-40 flex items-center justify-center card-art">
+                    <i class="fas fa-globe text-5xl text-accent"></i>
                 </div>
                 <div class="p-6">
-                    <h3 class="text-xl font-bold mb-2 text-white">Developing a Website</h3>
-                    <p class="text-slate-400 text-sm">Cloudflare Pages와 GitHub Action을 활용한 자동 배포 시스템 구축.</p>
+                    <h3 class="text-xl font-bold mb-2 text-ink">Developing a Website</h3>
+                    <p class="text-muted text-sm">Cloudflare Pages와 GitHub Action을 활용한 자동 배포 시스템 구축.</p>
                 </div>
             </div>
 
-            <div data-aos="fade-up" data-aos-delay="300" class="filter-card project bg-[#1e293b] rounded-2xl overflow-hidden border border-slate-700 hover:-translate-y-2 transition-all">
-                <div class="h-40 bg-gradient-to-br from-emerald-600/20 to-teal-600/20 flex items-center justify-center">
-                    <i class="fas fa-gamepad text-5xl text-emerald-500/50"></i>
+            <div class="filter-card project overflow-hidden border rule transition-all">
+                <div class="h-40 flex items-center justify-center card-art">
+                    <i class="fas fa-gamepad text-5xl text-accent"></i>
                 </div>
                 <div class="p-6">
-                    <h3 class="text-xl font-bold mb-2 text-white">Unity 3D Project</h3>
-                    <p class="text-slate-400 text-sm">유니티 엔진을 활용하여 제작 중인 3D 게임 프로젝트입니다.</p>
+                    <h3 class="text-xl font-bold mb-2 text-ink">Unity 3D Project</h3>
+                    <p class="text-muted text-sm">유니티 엔진을 활용하여 제작 중인 3D 게임 프로젝트입니다.</p>
                 </div>
             </div>
 
-            <a href="pages/abroad.html" data-aos="fade-up" data-aos-delay="100" class="filter-card abroad abroad bg-[#1e293b] rounded-2xl overflow-hidden border border-slate-700 hover:border-orange-500 hover:-translate-y-2 transition-all group block">
-                <div class="h-40 bg-gradient-to-br from-orange-600/20 to-yellow-600/20 flex items-center justify-center">
-                    <i class="fas fa-plane-departure text-5xl text-orange-500/50 group-hover:scale-110 transition-transform"></i>
+            <a href="pages/abroad.html" class="filter-card abroad overflow-hidden border rule transition-all group block">
+                <div class="h-40 flex items-center justify-center card-art">
+                    <i class="fas fa-plane-departure text-5xl text-accent transition-transform"></i>
                 </div>
                 <div class="p-6">
-                    <div class="text-orange-400 text-xs font-bold uppercase tracking-wider mb-2">Abroad</div>
-                    <h3 class="text-xl font-bold mb-2 text-white">해외 프로그램 경험</h3>
-                    <p class="text-slate-400 text-sm">필리핀 및 미국 어학 연수를 통한 글로벌 역량 강화 경험.</p>
-                    <div class="mt-4 flex items-center text-orange-400 text-sm font-semibold">
-                        자세히 보기 <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    <div class="text-accent text-xs font-bold uppercase tracking-wider mb-2">Abroad</div>
+                    <h3 class="text-xl font-bold mb-2 text-ink">해외 프로그램 경험</h3>
+                    <p class="text-muted text-sm">필리핀 및 미국 어학 연수를 통한 글로벌 역량 강화 경험.</p>
+                    <div class="mt-4 flex items-center text-accent text-sm font-semibold">
+                        자세히 보기 <i class="fas fa-arrow-right ml-2 transition-transform"></i>
                     </div>
                 </div>
             </a>
 
-            <a href="pages/etc.html" data-aos="fade-up" data-aos-delay="200" class="filter-card etc bg-[#1e293b] rounded-2xl overflow-hidden border border-slate-700 hover:border-pink-500 hover:-translate-y-2 transition-all group block">
-                <div class="h-40 bg-gradient-to-br from-pink-600/20 to-red-600/20 flex items-center justify-center">
-                    <i class="fas fa-certificate text-5xl text-pink-500/50 group-hover:scale-110 transition-transform"></i>
+            <a href="pages/etc.html" class="filter-card etc overflow-hidden border rule transition-all group block">
+                <div class="h-40 flex items-center justify-center card-art">
+                    <i class="fas fa-certificate text-5xl text-accent transition-transform"></i>
                 </div>
                 <div class="p-6">
-                    <div class="text-pink-400 text-xs font-bold uppercase tracking-wider mb-2">Activities</div>
-                    <h3 class="text-xl font-bold mb-2 text-white">기타 활동</h3>
-                    <p class="text-slate-400 text-sm">밴드 동아리, 게임 동아리, 언어 교류, 버디 등 다채로운 경험들.</p>
-                    <div class="mt-4 flex items-center text-pink-400 text-sm font-semibold">
-                        자세히 보기 <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    <div class="text-accent text-xs font-bold uppercase tracking-wider mb-2">Activities</div>
+                    <h3 class="text-xl font-bold mb-2 text-ink">기타 활동</h3>
+                    <p class="text-muted text-sm">밴드 동아리, 게임 동아리, 언어 교류, 버디 등 다채로운 경험들.</p>
+                    <div class="mt-4 flex items-center text-accent text-sm font-semibold">
+                        자세히 보기 <i class="fas fa-arrow-right ml-2 transition-transform"></i>
                     </div>
                 </div>
             </a>
@@ -141,41 +289,35 @@
         </div>
     </section>
 
-    <footer class="py-20 text-center border-t border-slate-800" data-aos="zoom-in">
-        <h2 class="text-2xl font-bold mb-8 text-white">Contact</h2>
+    <footer id="contact" class="py-20 text-center border-t rule">
+        <h2 class="text-2xl font-bold mb-8 text-ink">Contact</h2>
         
         <div class="flex justify-center gap-8 text-2xl">
-            <a href="https://github.com/sehyunp03" target="_blank" class="text-slate-400 hover:text-white transition-colors">
+            <a href="https://github.com/sehyunp03" target="_blank" class="text-muted hover-accent transition-colors">
                 <i class="fab fa-github"></i>
             </a>
 
-            <div class="relative group cursor-pointer" onclick="복사하기()">
-                <i class="fas fa-envelope text-slate-400 group-hover:text-blue-400 transition-colors"></i>
+            <div class="relative group cursor-pointer" onclick="copyEmail()">
+                <i class="fas fa-envelope text-muted group-accent transition-colors"></i>
                 
-                <span id="copyTooltip" class="absolute -top-10 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[10px] py-1 px-2 rounded opacity-0 transition-all duration-300 pointer-events-none whitespace-nowrap">
+                <span id="copyTooltip" class="absolute -top-10 left-1/2 -translate-x-1/2 text-ink text-[10px] py-1 px-2 opacity-0 transition-all duration-300 pointer-events-none whitespace-nowrap">
                     이메일 복사 완료! ✨
                 </span>
                 
-                <span class="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                <span class="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] text-muted opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                     Click to Copy
                 </span>
             </div>
 
-            <a href="https://blog.naver.com/sehyun_daily" target="_blank" class="text-slate-400 hover:text-white transition-colors">
+            <a href="https://blog.naver.com/sehyun_daily" target="_blank" class="text-muted hover-accent transition-colors">
                 <i class="fas fa-blog"></i>
             </a>
         </div>
         
-        <p class="mt-12 text-slate-500 text-sm">© 2026 박세현. All rights reserved.</p>
+        <p class="mt-12 text-muted text-sm">© 2026 박세현. All rights reserved.</p>
     </footer>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({
-            duration: 1000,
-            once: true,
-            offset: 100
-        });
         
         // 이메일 복사 함수 (아이콘 클릭 시 실행)
         function copyEmail() {
@@ -208,7 +350,6 @@
                 btns[i].classList.remove('active');
                 if (btns[i].getAttribute('onclick').includes(c)) { btns[i].classList.add('active'); }
             }
-            AOS.refresh();
         }
     </script>
 </body>
